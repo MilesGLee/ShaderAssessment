@@ -8,6 +8,10 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private List<Transform> _cameraPositions = new List<Transform>();
     [SerializeField] private UIManager _UIManager;
 
+    /// <summary>
+    /// Fade out the screen and move the camera to the given position index
+    /// </summary>
+    /// <param name="positionIndex"></param>
     public void MoveCamera(int positionIndex) 
     {
         _UIManager.Fade(1.0f, 0.5f);
