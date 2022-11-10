@@ -77,6 +77,24 @@ public class GeneratorBehavior : MonoBehaviour
                 RoutineBehaviour.Instance.StartNewTimedAction(args => Instantiate(_spawnList[7], _spawnLocation.position, Quaternion.identity), TimedActionCountType.SCALEDTIME, 1.5f);
             }
         }
+        if (_typeIndex == 2)
+        {
+            if (_elementIndex == 0)
+            {
+                Instantiate(_spawnList[0], _spawnLocation.position, Quaternion.identity);
+                RoutineBehaviour.Instance.StartNewTimedAction(args => Instantiate(_spawnList[8], _spawnLocation.position, Quaternion.identity), TimedActionCountType.SCALEDTIME, 1.5f);
+            }
+            if (_elementIndex == 1)
+            {
+                Instantiate(_spawnList[0], _spawnLocation.position, Quaternion.identity);
+                RoutineBehaviour.Instance.StartNewTimedAction(args => Instantiate(_spawnList[9], _spawnLocation.position, Quaternion.identity), TimedActionCountType.SCALEDTIME, 1.5f);
+            }
+            if (_elementIndex == 2)
+            {
+                Instantiate(_spawnList[0], _spawnLocation.position, Quaternion.identity);
+                RoutineBehaviour.Instance.StartNewTimedAction(args => Instantiate(_spawnList[10], _spawnLocation.position, Quaternion.identity), TimedActionCountType.SCALEDTIME, 1.5f);
+            }
+        }
     }
 
     public void IncrementType() 

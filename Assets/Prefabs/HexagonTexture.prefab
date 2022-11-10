@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a43bfbabf7677d42a732395f12371f5, type: 2}
+  - {fileID: 2100000, guid: fe811b656fc382a4d862b870c363f6d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,10 +94,10 @@ GameObject:
   - component: {fileID: 2053594931973667188}
   - component: {fileID: 8318162587766010634}
   - component: {fileID: 317319973133127794}
-  - component: {fileID: 7865634155672612215}
+  - component: {fileID: 910049203932938692}
   m_Layer: 0
-  m_Name: SmileTexture
-  m_TagString: Smile
+  m_Name: HexagonTexture
+  m_TagString: Hexagon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 119
   _outline: {fileID: 3235160433327694277}
---- !u!23 &7865634155672612215
+--- !u!23 &910049203932938692
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +191,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a43bfbabf7677d42a732395f12371f5, type: 2}
+  - {fileID: 2100000, guid: fe811b656fc382a4d862b870c363f6d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -353,7 +353,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a43bfbabf7677d42a732395f12371f5, type: 2}
+  - {fileID: 2100000, guid: fe811b656fc382a4d862b870c363f6d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

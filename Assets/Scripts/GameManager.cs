@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private Transform _holdPosition;
     [SerializeField] private LayerMask _ignoreGrabLayer;
+    [SerializeField] private GameObject _grabButton;
     private GrabbableBehaviour _selectedObject;
     private GrabbableBehaviour _heldObject;
 
@@ -20,12 +21,20 @@ public class GameManager : MonoBehaviour
         _cameraManager = GetComponent<CameraManager>();
         _heldObject = null;
         _selectedObject = null;
+        _grabButton.SetActive(false);
 
         //SelectLocationTable();
     }
 
     private void Update()
     {
+        if (_selectedObject != null && _heldObject == null)
+            _grabButton.SetActive(true);
+        if (_selectedObject == null)
+            _grabButton.SetActive(false);
+        if (_heldObject != null)
+            _grabButton.SetActive(false);
+
         //Toggle map on and off
         if (Input.GetKeyDown(KeyCode.Tab)) 
         {
@@ -63,6 +72,7 @@ public class GameManager : MonoBehaviour
             }
             if (_heldObject != null) 
             {
+                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, _ignoreGrabLayer))
@@ -80,7 +90,15 @@ public class GameManager : MonoBehaviour
             }
         }
         //Holding selected objects
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _selectedObject != null && _heldObject == null) 
+        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        {
+            HoldObject();
+        }
+    }
+
+    public void HoldObject() 
+    {
+        if (_selectedObject != null && _heldObject == null)
         {
             _selectedObject.GetComponent<Rigidbody>().isKinematic = true;
             _selectedObject.transform.parent = _holdPosition;
@@ -106,5 +124,16 @@ public class GameManager : MonoBehaviour
     {
         _UIManager.CloseMap();
         _cameraManager.MoveCamera(1);
+    }
+
+    public void SelectLocationQuestion()
+    {
+        _UIManager.CloseMap();
+        _cameraManager.MoveCamera(2);
+    }
+
+    public void QuitToMainMenu() 
+    {
+        Application.LoadLevel("menu_scene");
     }
 }

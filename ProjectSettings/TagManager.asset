@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DissolveShader
+  - Cube
+  - Sphere
+  - Cylinder
+  - Capsule
+  - Tile
+  - Hexagon
+  - Smile
+  - PowerupShader
+  - DotMatrixShader
   layers:
   - Default
   - TransparentFX
