@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //Default variables
         _UIManager = GetComponent<UIManager>();
         _cameraManager = GetComponent<CameraManager>();
         _heldObject = null;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //Display grab button
         if (_selectedObject != null && _heldObject == null)
             _grabButton.SetActive(true);
         if (_selectedObject == null)
@@ -126,12 +128,18 @@ public class GameManager : MonoBehaviour
         _cameraManager.MoveCamera(1);
     }
 
+    /// <summary>
+    /// Move camera to hasred location
+    /// </summary>
     public void SelectLocationQuestion()
     {
         _UIManager.CloseMap();
         _cameraManager.MoveCamera(2);
     }
 
+    /// <summary>
+    /// Quit to main menu 
+    /// </summary>
     public void QuitToMainMenu() 
     {
         Application.LoadLevel("menu_scene");

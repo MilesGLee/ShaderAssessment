@@ -11,6 +11,7 @@ public class MainMenuBehavior : MonoBehaviour
 
     private void Start()
     {
+        //Default variables
         _tutorialToggle = false;
         _mainMenu.SetActive(true);
         _tutorialMenu.SetActive(false);
@@ -18,6 +19,7 @@ public class MainMenuBehavior : MonoBehaviour
 
     private void Update()
     {
+        //Display the tutorial
         if (_tutorialToggle) 
         {
             _mainMenu.SetActive(false);
@@ -30,16 +32,25 @@ public class MainMenuBehavior : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Toggle the tutorial boolean
+    /// </summary>
     public void TutorialToggle() 
     {
         _tutorialToggle = !_tutorialToggle;
     }
 
+    /// <summary>
+    /// Quit the application
+    /// </summary>
     public void QuitGame() 
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// Load the play scene
+    /// </summary>
     public void PlayGame() 
     {
         Application.LoadLevel("play_scene");

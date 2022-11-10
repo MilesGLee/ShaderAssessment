@@ -16,6 +16,7 @@ public class InteractableBehaviour : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //Check if this object should only invoke the event once, then invoke the event
         if (_onlyOnce && !_invoked)
         {
             _invoked = true;

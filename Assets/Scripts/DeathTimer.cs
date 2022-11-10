@@ -10,6 +10,7 @@ public class DeathTimer : MonoBehaviour
 
     private void Start()
     {
+        //Wait the timer and kill object
         RoutineBehaviour.Instance.StartNewTimedAction(args => 
         {
             if (_spawnOnDeath)

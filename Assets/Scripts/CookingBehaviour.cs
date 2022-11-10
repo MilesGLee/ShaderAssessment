@@ -5,39 +5,49 @@ using TMPro;
 
 public class CookingBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject _puffParticle;
+    //Variables used for cooking
+    [SerializeField] private GameObject _puffParticle; 
     [SerializeField] private GameObject _infoObject;
     [SerializeField] private GameObject _buttonsObject;
     [SerializeField] private GameObject _soupObject;
     [SerializeField] private GameObject _dissolveBoard;
     [SerializeField] private GameObject _powerupBoard;
     [SerializeField] private GameObject _dotBoard;
+    //Variables for the dissolve shader
     [SerializeField] private TMP_Text _modelText;
     [SerializeField] private TMP_Text _textureText;
     [SerializeField] private TMP_Text _colorText;
     [SerializeField] private TMP_Text _widthText;
     [SerializeField] private TMP_Text _noiseText;
+    //Variables for the power up shader
     [SerializeField] private TMP_Text _powerModelText;
     [SerializeField] private TMP_Text _powerTextureText;
     [SerializeField] private TMP_Text _powerColorText;
     [SerializeField] private TMP_Text _powerSpeedText;
     [SerializeField] private TMP_Text _powerWidthText;
     [SerializeField] private TMP_Text _powerHeightText;
+    //Variables for the dot matrix shader
     [SerializeField] private TMP_Text _dotModelText;
     [SerializeField] private TMP_Text _dotTextureText;
     [SerializeField] private TMP_Text _dotColorText;
     [SerializeField] private TMP_Text _dotSizeText;
     [SerializeField] private TMP_Text _dotSpaceText;
+
+    //Referenced base objects
     [SerializeField] private GameObject _cubeBase;
     [SerializeField] private GameObject _sphereBase;
     [SerializeField] private GameObject _cylinderBase;
     [SerializeField] private GameObject _capsuleBase;
+    //Referenced base textures
     [SerializeField] private Texture _tileBase;
     [SerializeField] private Texture _hexBase;
     [SerializeField] private Texture _smileBase;
+    //Referenced base shaders
     [SerializeField] private Shader _dissolveBase;
     [SerializeField] private Shader _powerupBase;
     [SerializeField] private Shader _dotBase;
+
+    //Enum for what mode the cooking pot is in
     private enum CookingMode 
     {
         EMPTY,
@@ -50,16 +60,19 @@ public class CookingBehaviour : MonoBehaviour
     private string _baseModel;
     private string _baseTexture;
     private Color _baseColor;
+    //The variables for manipulating the shaders variables
     private float _edgeWidth, _noisePower, _powerWidth, _powerHeight, _powerSpeed, _dotSize, _dotSpace;
 
 
     private void Start()
     {
+        //Default cooking mode
         _cookingMode = CookingMode.EMPTY;
     }
 
     private void Update()
     {
+        //If the pot is empty
         if (_cookingMode == CookingMode.EMPTY) 
         {
             _infoObject.SetActive(true);
@@ -70,6 +83,7 @@ public class CookingBehaviour : MonoBehaviour
             _soupObject.SetActive(false);
             _cookTrigger = false;
         }
+        //If cooking a dissolve shader
         if (_cookingMode == CookingMode.DISSOLVE)
         {
             _infoObject.SetActive(false);
@@ -84,6 +98,7 @@ public class CookingBehaviour : MonoBehaviour
             _widthText.text = "Edge Width: " + _edgeWidth;
             _noiseText.text = "Noise Scale: " + _noisePower;
         }
+        //If cooking a power up shader
         if (_cookingMode == CookingMode.POWERUP)
         {
             _infoObject.SetActive(false);
@@ -99,6 +114,7 @@ public class CookingBehaviour : MonoBehaviour
             _powerWidthText.text = "Width: " + _powerWidth;
             _powerHeightText.text = "Height: " + _powerHeight;
         }
+        //If cooking a dot matrix shader
         if (_cookingMode == CookingMode.DOTMATRIX)
         {
             _infoObject.SetActive(false);
@@ -117,6 +133,7 @@ public class CookingBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //If the pot is empty
         if (_cookingMode == CookingMode.EMPTY) 
         {
             if (other.tag == "DissolveShader") 
@@ -154,6 +171,7 @@ public class CookingBehaviour : MonoBehaviour
                 _cookingMode = CookingMode.DOTMATRIX;
             }
         }
+        //If the pot is not empty
         if (_cookingMode != CookingMode.EMPTY) 
         {
             if (other.tag == "Cube" || other.tag == "Sphere" || other.tag == "Cylinder" || other.tag == "Capsule") 
@@ -171,13 +189,20 @@ public class CookingBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reset the pot to empty state
+    /// </summary>
     public void ResetRecipe() 
     {
         _cookingMode = CookingMode.EMPTY;
     }
 
+    /// <summary>
+    /// Spawn a new game object based on the ingredients and chosen variables
+    /// </summary>
     public void CookObject() 
     {
+        //Spawn dissolve object
         if (_cookingMode == CookingMode.DISSOLVE) 
         {
             _cookingMode = CookingMode.EMPTY;
@@ -224,6 +249,7 @@ public class CookingBehaviour : MonoBehaviour
             Instantiate(_puffParticle, transform.position, Quaternion.identity);
         }
 
+        //Spawn Power up object
         if (_cookingMode == CookingMode.POWERUP)
         {
             _cookingMode = CookingMode.EMPTY;
@@ -271,6 +297,7 @@ public class CookingBehaviour : MonoBehaviour
             Instantiate(_puffParticle, transform.position, Quaternion.identity);
         }
 
+        //Spawn dot matrix object
         if (_cookingMode == CookingMode.DOTMATRIX)
         {
             _cookingMode = CookingMode.EMPTY;
@@ -318,6 +345,9 @@ public class CookingBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the color of the shader to white
+    /// </summary>
     public void ColorWhite()
     {
         _baseColor = Color.white;
@@ -326,6 +356,9 @@ public class CookingBehaviour : MonoBehaviour
         _dotColorText.text = "Color: White";
     }
 
+    /// <summary>
+    /// Changes the color of the shader to black
+    /// </summary>
     public void ColorBlack()
     {
         _baseColor = Color.black;
@@ -334,6 +367,9 @@ public class CookingBehaviour : MonoBehaviour
         _dotColorText.text = "Color: Black";
     }
 
+    /// <summary>
+    /// Changes the color of the shader to red
+    /// </summary>
     public void ColorRed() 
     {
         _baseColor = Color.red;
@@ -342,6 +378,9 @@ public class CookingBehaviour : MonoBehaviour
         _dotColorText.text = "Color: Red";
     }
 
+    /// <summary>
+    /// Changes the color of the shader to yellow
+    /// </summary>
     public void ColorYellow()
     {
         _baseColor = Color.yellow;
@@ -350,6 +389,9 @@ public class CookingBehaviour : MonoBehaviour
         _dotColorText.text = "Color: Yellow";
     }
 
+    /// <summary>
+    /// Changes the color of the shader to green
+    /// </summary>
     public void ColorGreen()
     {
         _baseColor = Color.green;
@@ -358,6 +400,9 @@ public class CookingBehaviour : MonoBehaviour
         _dotColorText.text = "Color: Green";
     }
 
+    /// <summary>
+    /// Changes the color of the shader to blue
+    /// </summary>
     public void ColorBlue()
     {
         _baseColor = Color.blue;
@@ -366,6 +411,9 @@ public class CookingBehaviour : MonoBehaviour
         _dotColorText.text = "Color: Blue";
     }
 
+    /// <summary>
+    /// Changes the color of the shader to purple
+    /// </summary>
     public void ColorPurple()
     {
         _baseColor = Color.magenta;
@@ -374,6 +422,9 @@ public class CookingBehaviour : MonoBehaviour
         _dotColorText.text = "Color: Purple";
     }
 
+    /// <summary>
+    /// Increase the edge width of the dissolve shader
+    /// </summary>
     public void IncreaseEdge() 
     {
         _edgeWidth += 0.01f;
@@ -381,6 +432,9 @@ public class CookingBehaviour : MonoBehaviour
             _edgeWidth = 1.0f;
     }
 
+    /// <summary>
+    /// Decrease the edge width of the dissolve shader
+    /// </summary>
     public void DecreaseEdge()
     {
         _edgeWidth -= 0.01f;
@@ -388,6 +442,9 @@ public class CookingBehaviour : MonoBehaviour
             _edgeWidth = 0.01f;
     }
 
+    /// <summary>
+    /// Increase the noise power in the dissolve shader
+    /// </summary>
     public void IncreaseNoise()
     {
         _noisePower += 10f;
@@ -395,6 +452,9 @@ public class CookingBehaviour : MonoBehaviour
             _noisePower = 500f;
     }
 
+    /// <summary>
+    /// Decrease the noise power in the dissolve shader
+    /// </summary>
     public void DecreaseNoise()
     {
         _noisePower -= 10f;
@@ -402,6 +462,9 @@ public class CookingBehaviour : MonoBehaviour
             _noisePower = 10f;
     }
 
+    /// <summary>
+    /// Increase the speed that the scroll effect happens in the power up shader
+    /// </summary>
     public void IncreasePowerSpeed()
     {
         _powerSpeed += 1f;
@@ -409,6 +472,9 @@ public class CookingBehaviour : MonoBehaviour
             _powerSpeed = 10f;
     }
 
+    /// <summary>
+    /// Decrease the speed that the scroll effect happens in the power up shader
+    /// </summary>
     public void DecreasePowerSpeed()
     {
         _powerSpeed -= 1f;
@@ -416,6 +482,9 @@ public class CookingBehaviour : MonoBehaviour
             _powerSpeed = 1f;
     }
 
+    /// <summary>
+    /// Increase the triangle width in the power up shader
+    /// </summary>
     public void IncreasePowerWidth()
     {
         _powerWidth += 1f;
@@ -423,6 +492,9 @@ public class CookingBehaviour : MonoBehaviour
             _powerWidth = 10f;
     }
 
+    /// <summary>
+    /// Decrease the triangle width in the power up shader
+    /// </summary>
     public void DecreasePowerWidth()
     {
         _powerWidth -= 1f;
@@ -430,6 +502,9 @@ public class CookingBehaviour : MonoBehaviour
             _powerWidth = 1f;
     }
 
+    /// <summary>
+    /// Increase the triangle height in the power up shader
+    /// </summary>
     public void IncreasePowerHeight()
     {
         _powerHeight += 1f;
@@ -437,6 +512,9 @@ public class CookingBehaviour : MonoBehaviour
             _powerHeight = 10f;
     }
 
+    /// <summary>
+    /// Decrease the triangle height in the power up shader
+    /// </summary>
     public void DecreasePowerHeight()
     {
         _powerHeight -= 1f;
@@ -444,6 +522,9 @@ public class CookingBehaviour : MonoBehaviour
             _powerHeight = 1f;
     }
 
+    /// <summary>
+    /// Increase the dot size in the dot matrix shader
+    /// </summary>
     public void IncreaseDotSize()
     {
         _dotSize += 1f;
@@ -451,6 +532,9 @@ public class CookingBehaviour : MonoBehaviour
             _dotSize = 10f;
     }
 
+    /// <summary>
+    /// Decrease the dot size in the dot matrix shader
+    /// </summary>
     public void DecreaseDotSize()
     {
         _dotSize -= 1f;
@@ -458,6 +542,9 @@ public class CookingBehaviour : MonoBehaviour
             _dotSize = 1f;
     }
 
+    /// <summary>
+    /// Increase the dot space in the dot matrix shader
+    /// </summary>
     public void IncreaseDotSpace()
     {
         _dotSpace += 1f;
@@ -465,6 +552,9 @@ public class CookingBehaviour : MonoBehaviour
             _dotSpace = 10f;
     }
 
+    /// <summary>
+    /// Decrease the dot space in the dot matrix shader
+    /// </summary>
     public void DecreaseDotSpace()
     {
         _dotSpace -= 1f;

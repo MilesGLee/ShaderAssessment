@@ -18,6 +18,7 @@ public class GeneratorBehavior : MonoBehaviour
 
     private void Update()
     {
+        //Display object and element list depending on the type index
         _typeText.text = _typeList[_typeIndex];
         if (_typeIndex == 0) 
         {
@@ -34,6 +35,9 @@ public class GeneratorBehavior : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Spawn an object based on the index of the type array and element array
+    /// </summary>
     public void PrintObject() 
     {
         if (_typeIndex == 0)
@@ -97,6 +101,9 @@ public class GeneratorBehavior : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Increase the type index
+    /// </summary>
     public void IncrementType() 
     {
         _typeIndex++;
@@ -107,6 +114,9 @@ public class GeneratorBehavior : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Decrease the type index
+    /// </summary>
     public void DecrementType()
     {
         _typeIndex--;
@@ -117,6 +127,9 @@ public class GeneratorBehavior : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Increase the element index
+    /// </summary>
     public void IncrementElement()
     {
         _elementIndex++;
@@ -144,6 +157,9 @@ public class GeneratorBehavior : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Decrease the element index
+    /// </summary>
     public void DecrementElement()
     {
         _elementIndex--;
